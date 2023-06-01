@@ -3,8 +3,8 @@ import { useState } from "react";
 export default function SearchBar({ addTodo }) {
   const [input, setInput] = useState("");
 
-  function onHandleSubmit() {
-    if (input !== "") {
+  function onHandleAddTodo() {
+    if (input!=="") {
       addTodo(input.trim());
       setInput("");
     }
@@ -18,7 +18,7 @@ export default function SearchBar({ addTodo }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={onHandleSubmit}>Aggiungi</button>
+      <button className="button" onClick={onHandleAddTodo}>Aggiungi</button>
     </div>
   );
 }
