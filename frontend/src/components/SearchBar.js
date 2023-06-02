@@ -16,6 +16,7 @@ export default function SearchBar({ addTodo }) {
         type="text"
         placeholder="Inserisci todo"
         value={input}
+        name="title"
         onChange={(e) => setInput(e.target.value)}
       />
       <button className="button" onClick={onHandleAddTodo}>Aggiungi</button>

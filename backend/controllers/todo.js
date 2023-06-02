@@ -25,10 +25,10 @@ export const getAllTodo = (req, res) => {
 
 // Aggiungere nuovo todo
 export const addTodo = (req, res) => {
-  const { title } = req.body;
+  const { id, title } = req.body;
 
-  const query = `INSERT INTO todo(title, completed) 
-                    VALUES("${title}", "false")`;
+  const query = `INSERT INTO todo(id, title, completed) 
+                    VALUES(${id},"${title}", "false")`;
 
   connection.query(query, (err, record) => {
     if (err)
@@ -77,6 +77,7 @@ export const modifyTodo = (req, res) => {
   });
 };
 
+// Modifica completato todo
 export const modifyCompleted = (req, res) => {
   const { id } = req.params;
 
@@ -174,6 +175,7 @@ export const modifyCompleted = (req, res) => {
   // });
 };
 
+// Elimina todo
 export const deleteTodo = (req, res) => {
   const { id } = req.params;
 

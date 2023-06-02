@@ -14,6 +14,14 @@ export default function Todo({ todo, completeTodo, modifyTodo, deleteTodo }) {
     setIsModify(true)
   }
 
+  function castStringBoolean(str){
+    if(str===true || str==="true"){
+      return true
+    }else{
+      return false
+    }
+  }
+
   return (
     <>
       <div>
@@ -22,11 +30,12 @@ export default function Todo({ todo, completeTodo, modifyTodo, deleteTodo }) {
           onChange={() => {
             completeTodo(todo.id);
           }}
-          checked={todo.completed}
+          // checked={todo.completed}
+          checked = {castStringBoolean(todo.completed)}
         />
 
         {!isModify ? (
-          <label style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
+          <label style={{ textDecoration: castStringBoolean(todo.completed) ? "line-through" : "none" }}>
             {todo.title}
           </label>
         ) : (
