@@ -1,15 +1,15 @@
-import express from "express"
-import { addTodo, deleteTodo, getAllTodo, modifyCompleted, modifyTodo } from "../controllers/todo.js"
+// import express from "express"
+// import { addTodo, deleteTodo, getAllTodo, modifyCompleted, modifyTodo } from "../controllers/todo.js"
 
-const router = express.Router()
+// const router = express.Router()
 
-router.get("/get", getAllTodo)
+// router.get("/get", getAllTodo)
 
-router.post("/add", addTodo)
+// router.post("/add", addTodo)
 
-router.patch("/modify/:id", modifyTodo)
-router.patch("/completed/:id", modifyCompleted)
+// router.patch("/modify/:id", modifyTodo)
+// router.patch("/completed/:id", modifyCompleted)
 
-router.delete("/delete/:id", deleteTodo)
+// router.delete("/delete/:id", deleteTodo)
 
-export default router
+// export default router
