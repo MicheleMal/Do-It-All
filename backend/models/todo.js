@@ -12,9 +12,9 @@ const todoSchema = mongoose.Schema({
     },
 
     completed: {
-        type: String,
-        enum: ["true", "false"],
-        default: "false"
+        type: Boolean,
+        default: false,
+        require: true
     },
 
     id_user:{
