@@ -25,9 +25,15 @@ export const register = async (req, res) => {
             check: true,
         });
     } catch (error) {
+        let duplicated = ""
         if (error.code === 11000) {
+            if(error.message.includes("email")){
+                duplicated  = "Email"
+            }else if(error.message.includes("username")){
+                duplicated  = "Username"
+            }
             res.status(409).json({
-                message: "Email already registered",
+                message: `${duplicated} already registered`,
                 data: [],
                 check: false,
             });
