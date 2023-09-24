@@ -60,7 +60,7 @@ export const modifyUser = async (req, res) => {
     } catch (error) {
         if (error.code === 11000) {
             res.status(409).json({
-                message: "Email already registered",
+                message: "Username already registered",
                 data: [],
                 check: false,
             });

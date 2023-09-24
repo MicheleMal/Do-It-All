@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+// TODO: Inserire alert dopo aver aggiornato le informazioni dell'account e creare componente per form aggiornamento informazioni
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

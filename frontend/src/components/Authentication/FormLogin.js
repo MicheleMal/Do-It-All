@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,6 +9,11 @@ const LoginPage = () => {
     const [login, setLogin] = useState({
         username: "",
         password: "",
+    });
+
+    const [loginInfo, setloginInfo] = useState({
+        message: "",
+        status: "",
     });
 
     const handleChange = (e) => {
@@ -38,15 +43,25 @@ const LoginPage = () => {
             }
         } catch (error) {
             if (error.response.status === 404) {
-                console.log(error.response.data.message);
+                setloginInfo({
+                    message: error.response.data.message,
+                    status: "danger",
+                });
             }
         }
     };
 
     return (
         <Container className="mt-5">
+            
             <Row className="justify-content-center">
+                
                 <Col md={6}>
+                    {loginInfo.message && (
+                <Alert key={loginInfo.status} variant={loginInfo.status}>
+                    {loginInfo.message}
+                </Alert>
+            )}
                     <div className="p-4 bg-light rounded shadow">
                         <h2 className="text-center mb-4">Benvenuto</h2>
                         <Form

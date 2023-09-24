@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FormLogin from "./components/Authentication/FormLogin";
 import Home from "./components/Home";
 import FormRegister from "./components/Authentication/FormRegister";
-import Profile from "./components/Authentication/Profile";
+import Profile from "./components/Profile/Profile";
 
 function App() {
     return (

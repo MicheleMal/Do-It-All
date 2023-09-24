@@ -40,12 +40,12 @@ const FormRegister = () => {
             );
 
             if (res.status === 201) {
-                // setRegistrationInfo({
-                //     message: res.data.message,
-                //     status: "success",
-                // });
+                setRegistrationInfo({
+                    message: res.data.message,
+                    status: "success",
+                });
                 // console.log(res.data.message);
-                navigate("/login");
+                //navigate("/login");
             }
         } catch (error) {
             if (error.response.status === 409) {
@@ -61,17 +61,29 @@ const FormRegister = () => {
 
     return (
         <Container className="mt-5">
+            
             <Row className="justify-content-center">
                 <Col md={6}>
+                    {
+                        // registrationInfo.message && (
+                        //     <Alert key={registrationInfo.status} variant={registrationInfo.status}>
+                        //         {registrationInfo.message}
+                        //     </Alert>
+                        // )
+
+                        registrationInfo.status === "success" ? (
+                            <Alert key={registrationInfo.status} variant={registrationInfo.status}>
+                                {registrationInfo.message} <Link to="/login">Puoi effettuare il login</Link>
+                            </Alert>
+                        ): (
+                            <Alert key={registrationInfo.status} variant={registrationInfo.status}>
+                                {registrationInfo.message}
+                            </Alert>
+                        )
+                    }
                     <div className="p-4 bg-light rounded shadow">
                         <h2 className="text-center mb-4">Benvenuto</h2>
 
-                        <Alert
-                            key={registrationInfo.status}
-                            variant={registrationInfo.status}
-                        >
-                            {registrationInfo.message}
-                        </Alert>
                         <Form autoComplete="off" onSubmit={handleSubmit}>
                             <Form.Group controlId="formUsername">
                                 <Form.Label>Username</Form.Label>
