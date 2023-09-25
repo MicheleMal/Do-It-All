@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginPage = () => {
@@ -15,6 +15,11 @@ const LoginPage = () => {
         message: "",
         status: "",
     });
+
+    const location = useLocation();
+    const queryString = location.search;
+    const params = new URLSearchParams(queryString);
+    const successMessage = params.get("success");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,15 +58,22 @@ const LoginPage = () => {
 
     return (
         <Container className="mt-5">
-            
             <Row className="justify-content-center">
-                
                 <Col md={6}>
                     {loginInfo.message && (
-                <Alert key={loginInfo.status} variant={loginInfo.status}>
-                    {loginInfo.message}
-                </Alert>
-            )}
+                        <Alert
+                            key={loginInfo.status}
+                            variant={loginInfo.status}
+                        >
+                            {loginInfo.message}
+                        </Alert>
+                    )}
+
+                    {successMessage && (
+                        <Alert key="success" variant="success">
+                            {successMessage}
+                        </Alert>
+                    )}
                     <div className="p-4 bg-light rounded shadow">
                         <h2 className="text-center mb-4">Benvenuto</h2>
                         <Form

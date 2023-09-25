@@ -61,7 +61,6 @@ const FormRegister = () => {
 
     return (
         <Container className="mt-5">
-            
             <Row className="justify-content-center">
                 <Col md={6}>
                     {
@@ -72,14 +71,23 @@ const FormRegister = () => {
                         // )
 
                         registrationInfo.status === "success" ? (
-                            <Alert key={registrationInfo.status} variant={registrationInfo.status}>
-                                {registrationInfo.message} <Link to="/login">Puoi effettuare il login</Link>
+                            <Alert
+                                key={registrationInfo.status}
+                                variant={registrationInfo.status}
+                            >
+                                {registrationInfo.message}{" "}
+                                <Link to="/login">
+                                    Puoi effettuare il login
+                                </Link>
                             </Alert>
-                        ): (
-                            <Alert key={registrationInfo.status} variant={registrationInfo.status}>
+                        ) : registrationInfo.status === "danger" ? (
+                            <Alert
+                                key={registrationInfo.status}
+                                variant={registrationInfo.status}
+                            >
                                 {registrationInfo.message}
                             </Alert>
-                        )
+                        ) : null
                     }
                     <div className="p-4 bg-light rounded shadow">
                         <h2 className="text-center mb-4">Benvenuto</h2>

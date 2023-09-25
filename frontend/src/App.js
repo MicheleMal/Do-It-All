@@ -5,6 +5,9 @@ import FormLogin from "./components/Authentication/FormLogin";
 import Home from "./components/Home";
 import FormRegister from "./components/Authentication/FormRegister";
 import Profile from "./components/Profile/Profile";
+import PageNotFound from "./components/PageNotFound";
+
+// TODO: Aggiungere sistema todo
 
 function App() {
     return (
@@ -15,6 +18,7 @@ function App() {
                 <Route path="/login" element={<FormLogin />} />
                 <Route path="/registration" element={<FormRegister />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </Router>
     );
