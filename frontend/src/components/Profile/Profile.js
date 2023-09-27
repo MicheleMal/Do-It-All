@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import FormChangeInformation from "./FormChangeInformation";
+import TodoApp from "../TodoApp/TodoApp"
 
 const Profile = () => {
     const [user, setUser] = useState([]);
@@ -37,7 +38,9 @@ const Profile = () => {
                 <Col md={6}>
                     <FormChangeInformation user={user} setUser={setUser} />
                 </Col>
-                <Col md={6}></Col>
+                <Col md={6}>
+                    <TodoApp/>
+                </Col>
             </Row>
         </Container>
     );
