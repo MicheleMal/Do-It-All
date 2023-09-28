@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import FormChangeInformation from "./FormChangeInformation";
-import TodoApp from "../TodoApp/TodoApp"
+import TodoApp from "../TodoApp/TodoApp";
 
 const Profile = () => {
     const [user, setUser] = useState([]);
@@ -12,7 +12,10 @@ const Profile = () => {
 
     const fetchData = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/user/profile", {
+            const res = await axios.get(
+                // "http://localhost:5000/user/profile",
+                "https://doitall.onrender.com/user/profile",
+                {
                 headers: { Authorization: `Bearer ${cookies.jwtToken}` },
             });
 
@@ -39,7 +42,7 @@ const Profile = () => {
                     <FormChangeInformation user={user} setUser={setUser} />
                 </Col>
                 <Col md={6}>
-                    <TodoApp/>
+                    <TodoApp />
                 </Col>
             </Row>
         </Container>

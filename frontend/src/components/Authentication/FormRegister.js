@@ -34,7 +34,8 @@ const FormRegister = () => {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/auth/register",
+                // "http://localhost:5000/auth/register",
+                "https://doitall.onrender.com/auth/register",
                 {
                     username: register.username,
                     email: register.email,

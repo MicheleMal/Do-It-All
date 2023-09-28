@@ -37,7 +37,8 @@ const LoginPage = () => {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/auth/login",
+                // "http://localhost:5000/auth/login"
+                "https://doitall.onrender.com/auth/login",
                 {
                     username: login.username,
                     password: login.password,

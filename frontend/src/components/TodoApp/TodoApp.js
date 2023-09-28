@@ -20,7 +20,10 @@ export const TodoApp = () => {
 
     const getAllTodos = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/todo/get", {
+            const res = await axios.get(
+                // "http://localhost:5000/todo/get", 
+                "https://doitall.onrender.com/todo/get",
+            {
                 headers: {
                     Authorization: `Bearer ${cookies.jwtToken}`,
                 },
@@ -44,7 +47,8 @@ export const TodoApp = () => {
         // console.log(newTodo);
         try {
             const res = await axios.post(
-                "http://localhost:5000/todo/add",
+                // "http://localhost:5000/todo/add",
+                "https://doitall.onrender.com/todo/add",
                 newTodo,
                 {
                     headers: {
@@ -89,7 +93,8 @@ export const TodoApp = () => {
     const onSaveModifyTodo = async (id, newTodo) => {
         try {
             const res = await axios.patch(
-                `http://localhost:5000/todo/modify/${id}`,
+                // `http://localhost:5000/todo/modify/${id}`
+                `https://doitall.onrender.com/todo/modify/${id}`,
                 newTodo,
                 {
                     headers: {
@@ -120,7 +125,8 @@ export const TodoApp = () => {
     const onDeleteTodo = async (id) => {
         try {
             const res = await axios.delete(
-                `http://localhost:5000/todo/delete/${id}`,
+                // `http://localhost:5000/todo/delete/${id}`,
+                `https://doitall.onrender.com/todo/delete/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${cookies.jwtToken}`,
@@ -154,7 +160,8 @@ export const TodoApp = () => {
     const onCompleteTodo = async (id) => {
         try {
             const res = await axios.patch(
-                `http://localhost:5000/todo/completed/${id}`,
+                // `http://localhost:5000/todo/completed/${id}`,
+                `https://doitall.onrender.com/todo/completed/${id}`,
                 null,
                 {
                     headers: {

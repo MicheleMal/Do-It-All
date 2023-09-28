@@ -25,7 +25,8 @@ const FormChangeInformation = ({ user, setUser }) => {
 
         try {
             const res = await axios.patch(
-                "http://localhost:5000/user/update",
+                // "http://localhost:5000/user/update",
+                "https://doitall.onrender.com/user/update",
                 user,
                 {
                     headers: {
