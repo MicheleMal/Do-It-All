@@ -1,6 +1,6 @@
 # Do-It-All
 
-Do-It-All è un'applicazione Todo List che ti consente di gestire le tue attività in modo efficiente. Con Do-It-All, puoi aggiungere nuove cose da fare, eliminare quelle esistenti, modificarne il contenuto e contrassegnarle come completate o incomplete. Il progetto è realizzato utilizzando React per il frontend, Node.js per il backend, MySQL per il database e CSS per lo styling.
+Do-It-All è un'applicazione Todo List che ti consente di gestire le tue attività in modo efficiente. Con Do-It-All, puoi aggiungere nuove cose da fare, eliminare quelle esistenti, modificarne il contenuto e contrassegnarle come completate o incomplete, tutto questo dopo aver eseguito il login all'account personale. Il progetto è realizzato utilizzando React per il frontend, Node.js per il backend, Mongodb per il database e bootstrap per lo styling.
 
 ## Caratteristiche
 
@@ -14,8 +14,8 @@ Do-It-All è un'applicazione Todo List che ti consente di gestire le tue attivit
 
 - Frontend: React
 - Backend: Node.js
-- Database: MySQL
-- Stile: CSS
+- Database: Mongodb
+- Stile: bootstrap
 
 ## Installazione
 
@@ -29,7 +29,7 @@ Do-It-All è un'applicazione Todo List che ti consente di gestire le tue attivit
 
 
 3. Configura il database:
-    - Create a MySQL database tramite il file backend/services/dbTodo.sql e aggiorna le credenziali del database nel file `backend/.env`.
+    - Aggiornare le credenziali del database nel file `backend/.env`.
 
 4. Avvia il frontend dell'applicazione:
     1. cd ../frontend
