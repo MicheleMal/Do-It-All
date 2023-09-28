@@ -25,7 +25,7 @@ app.use("/user", userRoutes);
 app.use("/todo", todoRoutes);
 
 mongoose
-    .connect(process.env.urlDbDev)
+    .connect(process.env.urlHost)
     .then(() => {
         app.listen(PORT, () => {
             console.log(`Server listen on port ${PORT}`);
