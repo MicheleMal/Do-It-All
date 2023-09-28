@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 export const TodoApp = () => {
     const [cookies] = useCookies(["jwtToken"]);
     const [todos, setTodos] = useState([]);
-    const [showInfoAddTodo, setShowInfoAddTodo] = useState({
+    const [showInfo, setshowInfo] = useState({
         message: "",
         status: "",
     });
@@ -31,20 +31,16 @@ export const TodoApp = () => {
             }
         } catch (error) {
             if (error.response.status === 404) {
-                setTodos([{
-                    title: "",
-                    description: ""
-                }])
-                setShowInfoAddTodo({
+                setshowInfo({
                     message: error.response.data.message,
-                    status: "danger"
-                })
+                    status: "danger",
+                });
             }
         }
     };
 
-    // Add new todo
-    const addTodo = async (newTodo) => {
+    // Function that adds a new everything
+    const onAddTodo = async (newTodo) => {
         // console.log(newTodo);
         try {
             const res = await axios.post(
@@ -58,7 +54,7 @@ export const TodoApp = () => {
             );
 
             if (res.status === 201) {
-                setShowInfoAddTodo({
+                setshowInfo({
                     message: res.data.message,
                     status: "success",
                 });
@@ -66,7 +62,7 @@ export const TodoApp = () => {
             }
         } catch (error) {
             if (error.response.status === 400) {
-                setShowInfoAddTodo({
+                setshowInfo({
                     message: error.response.data.message,
                     status: "danger",
                 });
@@ -74,6 +70,7 @@ export const TodoApp = () => {
         }
     };
 
+    // Function that allows the modification of the todo
     const startEditTodo = (idTodo) => {
         const currentTodo = todos.find((todo) => todo._id === idTodo);
         setNewTodo({
@@ -83,11 +80,13 @@ export const TodoApp = () => {
         setEditingTodo(idTodo);
     };
 
+    // Function that cancels the todo modification
     const cancelEditTodo = () => {
         setEditingTodo(null);
     };
 
-    const saveModifyTodo = async (id, newTodo) => {
+    // Function that modifies the todo
+    const onSaveModifyTodo = async (id, newTodo) => {
         try {
             const res = await axios.patch(
                 `http://localhost:5000/todo/modify/${id}`,
@@ -100,7 +99,7 @@ export const TodoApp = () => {
             );
 
             if (res.status === 200) {
-                setShowInfoAddTodo({
+                setshowInfo({
                     message: res.data.message,
                     status: "success",
                 });
@@ -109,7 +108,7 @@ export const TodoApp = () => {
             getAllTodos();
         } catch (error) {
             if (error.response.status === 404) {
-                setShowInfoAddTodo({
+                setshowInfo({
                     message: error.response.data.message,
                     status: "danger",
                 });
@@ -117,30 +116,69 @@ export const TodoApp = () => {
         }
     };
 
-    const deleteTodo = async (id) =>{
+    // Function that eliminates todo
+    const onDeleteTodo = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:5000/todo/delete/${id}`, {
-                headers:{
-                    Authorization: `Bearer ${cookies.jwtToken}`
+            const res = await axios.delete(
+                `http://localhost:5000/todo/delete/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${cookies.jwtToken}`,
+                    },
                 }
-            })
+            );
 
-            if(res.status === 200){
-                setShowInfoAddTodo({
+            if (res.status === 200) {
+                setshowInfo({
                     message: res.data.message,
-                    status: "success"
-                })
-                getAllTodos()
+                    status: "success",
+                });
+
+                if (todos.length === 1) {
+                    setTodos([]);
+                }
+
+                getAllTodos();
             }
         } catch (error) {
-            if(error.response.status===404){
-                setShowInfoAddTodo({
+            if (error.response.status === 404) {
+                setshowInfo({
                     message: error.response.data.message,
-                    status: "danger"
-                })
+                    status: "danger",
+                });
             }
         }
-    }
+    };
+
+    // Function that completes or incompletes the todo
+    const onCompleteTodo = async (id) => {
+        try {
+            const res = await axios.patch(
+                `http://localhost:5000/todo/completed/${id}`,
+                null,
+                {
+                    headers: {
+                        Authorization: `Bearer ${cookies.jwtToken}`,
+                    },
+                }
+            );
+
+            if (res.status === 200) {
+                setshowInfo({
+                    message: res.data.message,
+                    status: "success",
+                });
+                getAllTodos();
+            }
+        } catch (error) {
+            if (error.response.status === 404) {
+                setshowInfo({
+                    message: error.response.data.message,
+                    status: "danger",
+                });
+            }
+        }
+    };
 
     const getTodoCalled = useRef(false);
     useEffect(() => {
@@ -151,15 +189,15 @@ export const TodoApp = () => {
 
     return (
         <Container>
-            {showInfoAddTodo.message && (
-                    <Alert key={showInfoAddTodo.status} variant={showInfoAddTodo.status}>
-                        {showInfoAddTodo.message}
-                    </Alert>
-                )}
+            {showInfo.message && (
+                <Alert key={showInfo.status} variant={showInfo.status}>
+                    {showInfo.message}
+                </Alert>
+            )}
             <h2>Lista dei Todo</h2>
             <Row>
                 <Col>
-                    <TodoForm addTodo={addTodo} info={showInfoAddTodo} />
+                    <TodoForm onAddTodo={onAddTodo} info={showInfo} />
                 </Col>
             </Row>
             <Row>
@@ -169,8 +207,9 @@ export const TodoApp = () => {
                         editingTodo={editingTodo}
                         startEditTodo={startEditTodo}
                         cancelEditTodo={cancelEditTodo}
-                        saveModifyTodo={saveModifyTodo}
-                        deleteTodo={deleteTodo}
+                        onSaveModifyTodo={onSaveModifyTodo}
+                        onDeleteTodo={onDeleteTodo}
+                        onCompleteTodo={onCompleteTodo}
                         newTodo={newTodo}
                         setNewTodo={setNewTodo}
                     />

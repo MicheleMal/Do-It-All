@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import {useCookies} from "react-cookie"
 import axios from "axios";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const [cookies] = useCookies(["jwtToken"])
 
     const [login, setLogin] = useState({
         username: "",
@@ -55,6 +57,12 @@ const LoginPage = () => {
             }
         }
     };
+
+    useEffect(()=>{
+        if(cookies.jwtToken){
+            navigate("/profile")
+        }
+    },[])
 
     return (
         <Container className="mt-5">

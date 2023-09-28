@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Badge } from "react-bootstrap";
 
 const Todo = ({
     todo,
     editing,
     startEditTodo,
     cancelEditTodo,
-    saveModifyTodo,
-    deleteTodo,
+    onSaveModifyTodo,
+    onDeleteTodo,
+    onCompleteTodo,
     newTodo,
     setNewTodo,
 }) => {
@@ -21,7 +22,7 @@ const Todo = ({
     };
 
     return (
-        <Container>
+        <div>
             {editing ? (
                 <div>
                     <Form autoComplete="off">
@@ -48,15 +49,20 @@ const Todo = ({
 
                     <Button
                         variant="success"
-                        onClick={() => saveModifyTodo(todo._id, newTodo)}
+                        onClick={() => onSaveModifyTodo(todo._id, newTodo)}
                     >
                         Salva
                     </Button>
-                    <Button variant="secondary" onClick={cancelEditTodo}>Annulla</Button>
+                    <Button variant="secondary" onClick={cancelEditTodo}>
+                        Annulla
+                    </Button>
                 </div>
             ) : (
                 <div>
-                    <h4>{todo.title}</h4>
+                    <Badge bg={todo.completed ? "success" : "secondary"}>
+                        {todo.completed ? "completato" : "non completato"}
+                    </Badge>
+                    <h4 className="mt-2">{todo.title}</h4>
                     <p>{todo.description}</p>
                     <Button
                         variant="primary"
@@ -64,10 +70,22 @@ const Todo = ({
                     >
                         Modifica
                     </Button>
-                    <Button variant="danger" onClick={()=>deleteTodo(todo._id)}>Elimina</Button>
+                    <Button
+                        variant="danger"
+                        onClick={() => onDeleteTodo(todo._id)}
+                    >
+                        Elimina
+                    </Button>
+                    <Form.Check
+                        type="checkbox"
+                        className="mt-3"
+                        label={todo.completed ? "Non completato" : "Completa"}
+                        checked={todo.completed}
+                        onChange={() => onCompleteTodo(todo._id)}
+                    />
                 </div>
             )}
-        </Container>
+        </div>
     );
 };
 

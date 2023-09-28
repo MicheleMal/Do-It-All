@@ -7,8 +7,6 @@ import FormRegister from "./components/Authentication/FormRegister";
 import Profile from "./components/Profile/Profile";
 import PageNotFound from "./components/PageNotFound";
 
-// TODO: Aggiungere completamento todo e fixare bug quando si elimina tutti i todo
-
 function App() {
     return (
         <Router>

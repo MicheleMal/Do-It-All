@@ -6,8 +6,9 @@ const TodoList = ({
     editingTodo,
     startEditTodo,
     cancelEditTodo,
-    saveModifyTodo,
-    deleteTodo,
+    onSaveModifyTodo,
+    onDeleteTodo,
+    onCompleteTodo,
     newTodo,
     setNewTodo,
 }) => {
@@ -17,18 +18,17 @@ const TodoList = ({
                 <h2>Lista dei Todo</h2>
                 <ListGroup>
                     {todos.map((todo) => (
-                        <ListGroup.Item key={todo._id}>
+                        <ListGroup.Item key={todo._id} className="mb-3 shadow" style={{border: "1px solid #ccc", borderRadius: "10px"}}>
                             <Todo
                                 todo={todo}
                                 editing={editingTodo === todo._id}
                                 startEditTodo={startEditTodo}
                                 cancelEditTodo={cancelEditTodo}
-                                saveModifyTodo={saveModifyTodo}
-                                deleteTodo={deleteTodo}
+                                onSaveModifyTodo={onSaveModifyTodo}
+                                onDeleteTodo={onDeleteTodo}
+                                onCompleteTodo={onCompleteTodo}
                                 newTodo={newTodo}
                                 setNewTodo={setNewTodo}
-                                //   cancelEditTodo={cancelEditTodo}
-                                //   handleDeleteTodo={handleDeleteTodo}
                             />
                         </ListGroup.Item>
                     ))}
