@@ -70,11 +70,13 @@ export const login = async (req, res) => {
             return res
                 .cookie("jwtToken", token, {
                     expires: new Date(Date.now() + expiresInMilliseconds),
+                    httpOnly: true,
+                    // secure: true,
                 })
                 .status(200)
                 .json({
                     message: "Login is done",
-                    data: token,
+                    data: userFind,
                     check: true,
                 });
         } else {
