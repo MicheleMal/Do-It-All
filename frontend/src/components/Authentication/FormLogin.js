@@ -37,7 +37,7 @@ const LoginPage = () => {
 
         try {
             const res = await axios.post(
-                // "http://localhost:5000/auth/login"
+                // "http://localhost:5000/auth/login",
                 "https://doitall.onrender.com/auth/login",
                 {
                     username: login.username,
@@ -48,7 +48,7 @@ const LoginPage = () => {
 
             const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
             if (res.status === 200) {
-                setCookie("jwtToken", res.data, {
+                setCookie("jwtToken", res.data.data, {
                     path: "/",
                     secure: true,
                     httpOnly: true,
