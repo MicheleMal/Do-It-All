@@ -66,17 +66,17 @@ export const login = async (req, res) => {
                 }
             );
 
-            const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+            // const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
             return res
-                .cookie("jwtToken", token, {
-                    expires: new Date(Date.now() + expiresInMilliseconds),
-                    httpOnly: true,
-                    // secure: true,
-                })
+                // .cookie("jwtToken", token, {
+                //     expires: new Date(Date.now() + expiresInMilliseconds),
+                //     httpOnly: true,
+                //     // secure: true,
+                // })
                 .status(200)
                 .json({
                     message: "Login is done",
-                    data: userFind,
+                    data: token,
                     check: true,
                 });
         } else {
