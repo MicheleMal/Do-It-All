@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import FormRegister from "./components/Authentication/FormRegister";
 import Profile from "./components/Profile/Profile";
 import PageNotFound from "./components/PageNotFound";
+import { useEffect, useState } from "react";
 
 function App() {
     return (

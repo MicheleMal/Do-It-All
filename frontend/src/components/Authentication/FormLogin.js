@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const [cookies, setCookie] = useCookies(["jwtToken"]);
 
     const [login, setLogin] = useState({
         username: "",
@@ -46,14 +44,8 @@ const LoginPage = () => {
                 { withCredentials: true }
             );
 
-            const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
             if (res.status === 200) {
-                setCookie("jwtToken", res.data.data, {
-                    secure: false,
-                    httpOnly: true,
-                    expires: new Date(Date.now() + expiresInMilliseconds),
-                    sameSite: "None",
-                });
+                localStorage.setItem("jwtToken", res.data.data)
                 navigate("/profile");
             }
         } catch (error) {
@@ -67,7 +59,7 @@ const LoginPage = () => {
     };
 
     useEffect(() => {
-        if (cookies.jwtToken) {
+        if (localStorage.getItem("jwtToken")) {
             navigate("/profile");
         }
     }, []);

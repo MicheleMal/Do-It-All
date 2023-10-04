@@ -68,11 +68,6 @@ export const login = async (req, res) => {
 
             // const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
             return res
-                // .cookie("jwtToken", token, {
-                //     expires: new Date(Date.now() + expiresInMilliseconds),
-                //     httpOnly: true,
-                //     // secure: true,
-                // })
                 .status(200)
                 .json({
                     message: "Login is done",
@@ -95,21 +90,3 @@ export const login = async (req, res) => {
         })
     }
 };
-
-export const getJwtCookie = (req, res)=>{
-    const jwtToken = req.cookies.jwtToken
-
-    if(jwtToken){
-        return res.status(200).json({
-            message: "Login done",
-            data: jwtToken,
-            check: true
-        })
-    }else{
-        return res.status(404).json({
-            message: "Not logged in",
-            data: [],
-            check: false
-        })
-    }
-}

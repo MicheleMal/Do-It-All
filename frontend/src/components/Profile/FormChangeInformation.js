@@ -1,13 +1,10 @@
 import { Container, Alert, Form, Button } from "react-bootstrap";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getJwtCookie } from "../../utils/api";
 
 const FormChangeInformation = ({ user, setUser }) => {
     const navigate = useNavigate();
-    const [cookies, , removeCookie] = useCookies(["jwtToken"]);
     const [showInfo, setShowInfo] = useState({
         message: "",
         status: "",
@@ -25,7 +22,6 @@ const FormChangeInformation = ({ user, setUser }) => {
         e.preventDefault();
 
         try {
-            const jwtToken = await getJwtCookie()
             const res = await axios.patch(
                 // "http://localhost:5000/user/update",
                 "https://doitall.onrender.com/user/update",
@@ -33,13 +29,13 @@ const FormChangeInformation = ({ user, setUser }) => {
                 {
                     headers: {
                         // Authorization: `Bearer ${cookies.jwtToken}`,
-                        Authorization: `Bearer ${jwtToken}`
+                        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
                     },
                 }
             );
 
             if (res.status === 200) {
-                removeCookie("jwtToken", { expires: new Date(0) });
+                localStorage.removeItem("jwtToken")
                 navigate(
                     "/login?success=Modifiche%20effettuate%20con%20successo"
                 );
@@ -55,6 +51,11 @@ const FormChangeInformation = ({ user, setUser }) => {
             console.error(error);
         }
     };
+
+    const handleSubmitLogout = ()=>{
+        localStorage.removeItem("jwtToken")
+        navigate("/")
+    }
 
     return (
         <Container>
@@ -86,6 +87,9 @@ const FormChangeInformation = ({ user, setUser }) => {
                     Modifica Informazioni
                 </Button>
             </Form>
+            <Button className="mt-3" onClick={handleSubmitLogout} variant="danger">
+                    Logout
+            </Button>
         </Container>
     );
 };

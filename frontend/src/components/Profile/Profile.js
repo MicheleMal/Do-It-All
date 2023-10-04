@@ -1,28 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 import FormChangeInformation from "./FormChangeInformation";
 import TodoApp from "../TodoApp/TodoApp";
-import { getJwtCookie } from "../../utils/api";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
+    const navigate = useNavigate()
     const [user, setUser] = useState([]);
-
-    // const [cookies] = useCookies(["jwtToken"]);
 
     const fetchData = async () => {
         try {
-            const jwtToken = await getJwtCookie()
-            console.log(jwtToken);
-            
             const res = await axios.get(
                 // "http://localhost:5000/user/profile",
                 "https://doitall.onrender.com/user/profile",
                 {
-                // headers: { Authorization: `Bearer ${cookies.jwtToken}` },
                 headers:{
-                    Authorization: `Bearer ${jwtToken}`
+                    Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
                 }
             });
 
@@ -38,6 +32,9 @@ const Profile = () => {
     useEffect(() => {
         if (fetchDataCalled.current) return;
         fetchDataCalled.current = true;
+        if(!localStorage.getItem("jwtToken")){
+            navigate("/login")
+        }
         fetchData();
     }, []);
 

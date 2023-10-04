@@ -50,10 +50,11 @@ const Todo = ({
                     <Button
                         variant="success"
                         onClick={() => onSaveModifyTodo(todo._id, newTodo)}
+                        className="mt-3"
                     >
                         Salva
                     </Button>
-                    <Button variant="secondary" onClick={cancelEditTodo}>
+                    <Button variant="secondary" onClick={cancelEditTodo} className="mt-3">
                         Annulla
                     </Button>
                 </div>
