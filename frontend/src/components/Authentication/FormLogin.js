@@ -51,7 +51,7 @@ const LoginPage = () => {
                 setCookie("jwtToken", res.data.data, {
                     path: "/",
                     secure: true,
-                    httpOnly: true,
+                    // httpOnly: true,
                     expires: new Date(Date.now() + expiresInMilliseconds),
                 });
                 navigate("/profile");
