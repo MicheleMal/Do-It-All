@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const NavBar = () => {
-    const [cookies] = useCookies(["jwtToken"]);
-    const jwtToken = cookies.jwtToken;
+    // const [cookies] = useCookies(["jwtToken"]);
+    // const jwtToken = cookies.jwtToken;
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -19,7 +19,7 @@ const NavBar = () => {
                             Home
                         </Nav.Link>
 
-                        {jwtToken ? (
+                        {/* {jwtToken ? (
                             <Nav.Link as={NavLink} to="/profile">
                                 Profile
                             </Nav.Link>
@@ -27,7 +27,10 @@ const NavBar = () => {
                             <Nav.Link as={NavLink} to="/login">
                                 Login
                             </Nav.Link>
-                        )}
+                        )} */}
+                        <Nav.Link as={NavLink} to="/login">
+                            Login
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

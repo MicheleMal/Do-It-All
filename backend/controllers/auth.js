@@ -95,3 +95,21 @@ export const login = async (req, res) => {
         })
     }
 };
+
+export const getJwtCookie = (req, res)=>{
+    const jwtToken = req.cookies.jwtToken
+
+    if(jwtToken){
+        return res.status(200).json({
+            message: "Login done",
+            data: jwtToken,
+            check: true
+        })
+    }else{
+        return res.status(404).json({
+            message: "Not logged in",
+            data: [],
+            check: false
+        })
+    }
+}

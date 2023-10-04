@@ -49,10 +49,10 @@ const LoginPage = () => {
             const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
             if (res.status === 200) {
                 setCookie("jwtToken", res.data.data, {
-                    path: "/",
-                    secure: true,
-                    // httpOnly: true,
+                    secure: false,
+                    httpOnly: true,
                     expires: new Date(Date.now() + expiresInMilliseconds),
+                    sameSite: "None",
                 });
                 navigate("/profile");
             }

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getJwtCookie } from "../../utils/api";
 
 const FormChangeInformation = ({ user, setUser }) => {
     const navigate = useNavigate();
@@ -24,13 +25,15 @@ const FormChangeInformation = ({ user, setUser }) => {
         e.preventDefault();
 
         try {
+            const jwtToken = await getJwtCookie()
             const res = await axios.patch(
                 // "http://localhost:5000/user/update",
                 "https://doitall.onrender.com/user/update",
                 user,
                 {
                     headers: {
-                        Authorization: `Bearer ${cookies.jwtToken}`,
+                        // Authorization: `Bearer ${cookies.jwtToken}`,
+                        Authorization: `Bearer ${jwtToken}`
                     },
                 }
             );

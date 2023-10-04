@@ -4,19 +4,26 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import FormChangeInformation from "./FormChangeInformation";
 import TodoApp from "../TodoApp/TodoApp";
+import { getJwtCookie } from "../../utils/api";
 
 const Profile = () => {
     const [user, setUser] = useState([]);
 
-    const [cookies] = useCookies(["jwtToken"]);
+    // const [cookies] = useCookies(["jwtToken"]);
 
     const fetchData = async () => {
         try {
+            const jwtToken = await getJwtCookie()
+            console.log(jwtToken);
+            
             const res = await axios.get(
                 // "http://localhost:5000/user/profile",
                 "https://doitall.onrender.com/user/profile",
                 {
-                headers: { Authorization: `Bearer ${cookies.jwtToken}` },
+                // headers: { Authorization: `Bearer ${cookies.jwtToken}` },
+                headers:{
+                    Authorization: `Bearer ${jwtToken}`
+                }
             });
 
             if (res.status === 200) {
